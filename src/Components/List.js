@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 function List({ employees, handleEdit, handleDelete }) {
   return (
@@ -20,20 +20,20 @@ function List({ employees, handleEdit, handleDelete }) {
               employees.map((employee, i) => (
                 <tr key={employee.id}>
                   <td>{i + 1}</td>
-                  <td>{employee.firstName}</td>
-                  <td>{employee.lastName}</td>
+                  <td>{employee.task}</td>
+                  <td>{employee.detail}</td>
                   <td>{employee.date}</td>
                   <td className='text-right'>
                     <button
                       className='button muted-button'
-                      onClick={() => handleEdit(employee.is)}>
+                      onClick={() => handleEdit(employee.id)}>
                       Edit
                     </button>
                   </td>
                   <td className='text-center'>
                     <button
                       className='button muted-button'
-                      onClick={() => handleDelete(employee.is)}>
+                      onClick={() => handleDelete(employee.id)}>
                       Delete
                     </button>
                   </td>
@@ -41,7 +41,9 @@ function List({ employees, handleEdit, handleDelete }) {
               ))
 
             ) : (
-              <tr colSpan={5}>No Task</tr>
+              <tr>
+                <td colSpan={5}>No Task</td>
+              </tr>
             )
 
           }

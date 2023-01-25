@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import Swal, { swal } from 'sweetalert2';
+import Swal from 'sweetalert2';
 function Add({ employees, setEmployees, setIsAdding }) {
 
   const [task, setTask] = useState('');
@@ -14,12 +14,35 @@ function Add({ employees, setEmployees, setIsAdding }) {
 
   const handleAdd = e => {
     e.preventDefault();
-    return Swal.fire({
-      icon: 'error',
-      title: 'Error',
-      text: 'All fields are required.',
-      showConfirmButton: true
-    })
+    if (!task || !date) {
+      return Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Task and Date is required.',
+        showConfirmButton: true
+      })
+    }
+
+
+    const id = employees.length + 1;
+    const newEmployee = {
+      id,
+      task,
+      detail,
+      date
+    }
+
+    employees.push(newEmployee);
+    setEmployees(employees);
+    setIsAdding(false);
+    Swal.fire({
+      icon: 'success',
+      title: 'Added',
+      text: 'Task is Added Sucessfully',
+      showConfirmButton: true,
+      timer: 1500
+    });
+
   }
   return (
     <div className='small-container'>
